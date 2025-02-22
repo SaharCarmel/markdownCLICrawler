@@ -3,7 +3,7 @@ import asyncio
 import argparse
 from pathlib import Path
 import logging
-from .crawler import crawl_documentation, crawl_multiple_libraries
+from crawler import crawl_documentation, crawl_multiple_libraries
 
 logger = logging.getLogger(__name__)
 

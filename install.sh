@@ -25,9 +25,14 @@ uv pip install "$PACKAGE_DIR"
 # Create ~/bin if it doesn’t exist
 mkdir -p ~/bin
 
-# Create download_docs script
+# Create download_docs script with proper variable expansion
 echo "Setting up download_docs script..."
-echo "#!/usr/bin/env bash\nPACKAGE_DIR=$PACKAGE_DIR\nsource \"\$PACKAGE_DIR/.venv/bin/activate\"\npython \"\$PACKAGE_DIR/mdCrawler/mdcrawler/cli.py\" \"\$@\"" > ~/bin/download_docs
+cat > ~/bin/download_docs << EOF
+#!/usr/bin/env bash
+PACKAGE_DIR=$PACKAGE_DIR
+source "\$PACKAGE_DIR/.venv/bin/activate"
+python "\$PACKAGE_DIR/mdCrawler/cli.py" "\$@"
+EOF
 chmod +x ~/bin/download_docs
 
 # Add ~/bin to PATH in .zshrc if not already present
